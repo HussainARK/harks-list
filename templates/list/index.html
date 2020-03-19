@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="row" style="text-align: center;">
+    <h3>Welcome to the H.A.R.K's List Website!</h3>
+    <h5>This is a Simple Web Scraper created by <a target="_blank"
+                                                   href="https://www.github.com/HussainARK">HussainARK</a>
+    </h5>
+</div>
+
+<div class="row">
+    <div class="col s4">
+        <div class="center">
+            <i class="material-icons" style="cursor: default; color: #EE5E63; font-size: 150px;">flash_on</i>
+            <h6>Very Fast</h6>
+            <p>It's a very Fast Web Scraper. because It depends on
+                <a target="_blank" href="https://www.djangoproject.com">Django</a>,
+                <a target="_blank"
+                   href="https://pypi.org/project/beautifulsoup4/">BeautifulSoup</a>
+                and
+                the Python <a target="_blank" href="https://requests.readthedocs.io/en/master/">Requests</a> Library.
+            </p>
+        </div>
+    </div>
+    <div class="col s4">
+        <div class="center">
+            <i class="material-icons" style="cursor: default; color: gray; font-size: 150px;">camera</i>
+            <h6>Filters the Results</h6>
+            <p>You can even Select the Country you're searching in, and It uses the Results given from the <a
+                    target="_blank" href="https://craigslist.org">Craigslist</a>
+                Website.</p>
+        </div>
+    </div>
+    <div class="col s4">
+        <div class="center">
+            <i class="material-icons" style="cursor: default; color: #66FF66; font-size: 150px;">android</i>
+            <h6>Supports Mobile Devices</h6>
+            <p>This Scraping Engine uses the <a target="_blank" href="https://materializecss.com">Materialize</a>
+                CSS Library which
+                is a Very Good Responsive Solution for Mobile & Desktop Devices.</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <form action="/" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <input title="Enter your Search Here" value="{{ search_text }}" required type="text" name="search-text"
+                   placeholder="Search Here..."/>
+            <select required class="browser-default" name="search-country">
+                <option value="" selected disabled>Choose the Country</option>
+                <optgroup label="US">
+                    <option value="losangeles">Los Angeles</option>
+                    <option value="washingtondc">Washington, DC</option>
+                </optgroup>
+                <optgroup label="Europe">
+                    <option value="berlin">Berlin</option>
+                    <option value="paris">Paris</option>
+                </optgroup>
+                <optgroup label="Asia">
+                    <option value="moscow">Moscow</option>
+                    <option value="tokyo">Tokyo</option>
+                    <option value="baghdad">Baghdad</option>
+                </optgroup>
+            </select>
+        </div>
+        <button type="submit" class="btn waves-effect waves-light">
+            Submit
+            <i class="material-icons right">send</i>
+        </button>
+    </form>
+</div>
+
+<div class="row">
+    <h4 style="text-align: center;">{{ search_text | title }}</h4>
+    {% if final_postings %}
+    <h5 style="text-align: center;">Results:</h5>
+    {% for posting in final_postings %}
+    <div class="col s4">
+        <div class="card">
+            <div class="card-image">
+                <a href="{{ posting.1 }}" target="_blank"><img src="{{ posting.3 }}"
+                                                               alt="Refresh the Browser Please"/></a>
+            </div>
+            <div class="card-content">
+                <p>{{ posting.0 }}</p>
+            </div>
+            <div class="card-action">
+                <a href="{{ posting.1 }}" target="_blank">Price: {{ posting.2 }}</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h5 style="text-align: center;">There are No Results. or, You haven't entered Anything in the Search Box yet.</h5>
+    {% endif %}
+</div>
+{% endblock body %}
