@@ -48,7 +48,7 @@ SESSION_COOKIE_SECURE = True
 
 CSRF_COOKIE_SECURE = True
 
-SECURE_REFERRER_POLICY = "no-referrer"
+SECURE_REFERRER_POLICY = "referrer"
 
 # Application definition
 
