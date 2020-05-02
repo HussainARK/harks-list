@@ -1,2 +1,5 @@
 .idea
 hark_list/.ENV
+.vscode
+venv/
+db.sqlite3

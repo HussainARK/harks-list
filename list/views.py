@@ -34,7 +34,7 @@ def index(request):
 
         for posting in posting_listings:
             posting_title = posting.find(class_='result-title').text
-            posring_url = posting.find('a').get('href')
+            posting_url = posting.find('a').get('href')
 
             if posting.find(class_='result-price'):
                 posting_price = posting.find(class_='result-price').text
@@ -47,7 +47,7 @@ def index(request):
             else:
                 posting_images_urls = 'https://www.craigslist.org/images/peace.jpg'
 
-            final_postings.append((posting_title, posring_url, posting_price, posting_images_urls))
+            final_postings.append((posting_title, posting_url, posting_price, posting_images_urls))
 
         frontend_context = {
             'search_text': search_text,

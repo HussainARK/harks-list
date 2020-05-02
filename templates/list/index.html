@@ -40,8 +40,9 @@
         </div>
     </div>
 </div>
+
 <div class="row">
-    <form action="/" method="POST">
+    <form action="/" method="GET">
         {% csrf_token %}
         <div class="row">
             <input title="Enter your Search Here" value="{{ search_text }}" required type="text" name="search-text"
