@@ -14,8 +14,8 @@ BASE_CRAIGSLIST_IMAGE_URL = "https://images.craigslist.org/{}_300x300.jpg"
 
 
 def index(request):
-    search_text = request.POST.get('search-text')
-    search_country = request.POST.get('search-country')
+    search_text = request.GET.get('search-text')
+    search_country = request.GET.get('search-country')
 
     while search_text and search_country is not None:
         final_url = BASE_CRAIGSLIST_POSTING_URL.format(search_country, quote_plus(search_text))
